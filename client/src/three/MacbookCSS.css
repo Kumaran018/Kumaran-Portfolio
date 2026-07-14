@@ -1,0 +1,283 @@
+/* CSS 3D MacBook Air Presentation Styles */
+
+.macbook-landing-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f7;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.macbook-landing-viewport.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 3D Scene Wrapper */
+.macbook-3d-scene {
+  position: relative;
+  width: 360px;
+  height: 260px;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tilt and float closed laptop */
+.macbook-3d-scene.is-closed-hover {
+  animation: floatLaptop 4s ease-in-out infinite;
+}
+
+@keyframes floatLaptop {
+  0% { transform: translateY(0px) rotateX(52deg) rotateZ(-12deg); }
+  50% { transform: translateY(-8px) rotateX(54deg) rotateZ(-11deg); }
+  100% { transform: translateY(0px) rotateX(52deg) rotateZ(-12deg); }
+}
+
+/* Position open laptop facing camera directly */
+.macbook-3d-scene.is-open {
+  transform: translateY(40px) rotateX(90deg) rotateZ(0deg) scale(1.25);
+}
+
+/* MacBook Chassis Assembly */
+.macbook-chassis {
+  position: relative;
+  width: 320px;
+  height: 210px;
+  transform-style: preserve-3d;
+}
+
+/* 1. Base case */
+.macbook-base-case {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e3e3e6 0%, #b8b8ba 100%);
+  border-radius: 12px;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+  box-shadow: 
+    0 30px 65px -15px rgba(0, 0, 0, 0.75),
+    0 10px 25px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid #9e9e9f;
+}
+
+/* Base accessories */
+.macbook-trackpad {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(0.5px);
+  width: 100px;
+  height: 62px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+.macbook-keyboard-bed {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  height: 110px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  transform: translateZ(0.5px);
+  padding: 6px;
+}
+
+.keyboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+
+.keyboard-key {
+  flex: 1;
+  background: #1c1c1e;
+  border-radius: 1.5px;
+  opacity: 0.95;
+  box-shadow: inset 0 -0.5px 0.5px rgba(255, 255, 255, 0.1);
+}
+
+/* Front notch indentation */
+.macbook-base-front-notch {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateZ(1px);
+  width: 50px;
+  height: 3px;
+  background: #a3a3a5;
+  border-radius: 0 0 4px 4px;
+}
+
+/* 2. Laptop Screen Lid */
+.macbook-lid-case {
+  position: absolute;
+  top: 0; /* Hinge location at the back */
+  left: 0;
+  right: 0;
+  height: 210px;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Lid closed flat relative to base */
+.is-closed-hover .macbook-lid-case {
+  transform: rotateX(90deg);
+}
+
+/* Lid stands up rotated backwards */
+.is-open .macbook-lid-case {
+  transform: rotateX(-90deg);
+}
+
+/* Back of Lid Cover (Holds Apple Logo) */
+.lid-outer-cover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f5f5f7 0%, #e3e3e6 25%, #c8c8cb 50%, #b8b8ba 75%, #e3e3e6 100%);
+  border-radius: 12px;
+  backface-visibility: hidden;
+  transform: rotateX(180deg) translateZ(1px);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.apple-logo-glow-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(180deg);
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes applePulse {
+  0%, 100% { 
+    color: #e3e3e6; 
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)) brightness(1); 
+  }
+  50% { 
+    color: #ffffff; 
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.95)) brightness(1.2); 
+  }
+}
+
+.is-closed-hover .apple-logo-glow-wrapper {
+  animation: applePulse 3s ease-in-out infinite;
+}
+
+.apple-logo-svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Inner Display Bezel (Shows Screen) */
+.lid-inner-bezel {
+  position: absolute;
+  inset: 0;
+  background: #09090b;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  transform: translateZ(1px);
+  padding: 8px 8px 14px 8px; /* MacBook notch margins style */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Bezel camera circle */
+.lid-inner-bezel::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  background: #1c1c1e;
+  border-radius: 50%;
+}
+
+.macbook-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Operating system styles */
+.screen-operating-system {
+  width: 100%;
+  height: 100%;
+  background-color: #0c0c0e;
+  color: #ffffff;
+  animation: screenPowerOn 0.6s ease-out forwards;
+}
+
+@keyframes screenPowerOn {
+  0% { opacity: 0; filter: brightness(2); }
+  60% { opacity: 0.5; filter: brightness(1.5); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+/* Typewriter welcome header */
+.welcome-typing {
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #0066cc;
+  width: 0;
+  animation: 
+    typing 1.2s steps(16, end) forwards,
+    blink-caret 0.75s step-end infinite;
+  animation-delay: 0.6s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #0066cc }
+}
+
+/* Micro-animations */
+.animate-fade-in-delayed {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.8s;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
