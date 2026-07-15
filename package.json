@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Production Monorepo wrapper for Kumaran R P's Portfolio",
   "scripts": {
-    "setup": "npm install --prefix client && npm install --prefix server",
+    "setup": "npm install --prefix client && npm install --prefix backend",
     "build": "npm run build --prefix client",
-    "start": "node server/server.js"
+    "start": "node backend/server.js"
   },
   "engines": {
     "node": ">=18.0.0"

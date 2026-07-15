@@ -31,7 +31,7 @@ Kumaaran Portfolio/
 │   ├── tailwind.config.js
 │   └── vite.config.js
 │
-└── server/                 # Express backend
+└── backend/                # Express backend
     ├── config/             # MongoDB configurations (db.js)
     ├── controllers/        # Controllers (auth, project, certificate, message, profile)
     ├── middleware/         # Auth protector, rate-limiters, error handling
@@ -48,12 +48,12 @@ Kumaaran Portfolio/
 * Node.js (v18 or higher recommended)
 * MongoDB database instance running locally or on MongoDB Atlas.
 
-### 1. Server Configuration
-1. Navigate to the server folder:
+### 1. Backend Configuration
+1. Navigate to the backend folder:
    ```bash
-   cd server
+   cd backend
    ```
-2. Install server-side dependencies:
+2. Install backend dependencies:
    ```bash
    npm install
    ```
