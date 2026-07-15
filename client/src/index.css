@@ -11,6 +11,7 @@
   body {
     background-color: #000000;
     color: #ffffff;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   /* Custom Midnight Scrollbar */
@@ -99,3 +100,136 @@
 .animate-pulse-slow {
   animation: pulse-slow 8s ease-in-out infinite;
 }
+
+/* Premium Light Theme Overrides */
+body.light-theme {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light-theme ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+body.light-theme .text-white {
+  color: #0f172a !important;
+}
+
+body.light-theme .text-white\/35 {
+  color: rgba(15, 23, 42, 0.5) !important;
+}
+
+body.light-theme .text-white\/40 {
+  color: rgba(15, 23, 42, 0.55) !important;
+}
+
+body.light-theme .text-white\/50 {
+  color: rgba(15, 23, 42, 0.65) !important;
+}
+
+body.light-theme .text-white\/60 {
+  color: rgba(15, 23, 42, 0.75) !important;
+}
+
+body.light-theme .text-white\/75 {
+  color: rgba(15, 23, 42, 0.8) !important;
+}
+
+body.light-theme .text-white\/70 {
+  color: rgba(15, 23, 42, 0.8) !important;
+}
+
+body.light-theme .text-white\/80 {
+  color: rgba(15, 23, 42, 0.9) !important;
+}
+
+body.light-theme .text-white\/90 {
+  color: rgba(15, 23, 42, 0.95) !important;
+}
+
+body.light-theme .bg-black\/95 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+}
+
+body.light-theme .bg-black\/75 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.light-theme .bg-black\/80 {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+}
+
+body.light-theme .bg-black\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+body.light-theme .bg-black\/40 {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+body.light-theme .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+body.light-theme .glass-panel {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .glass-card {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .glass-card:hover {
+  border-color: rgba(0, 102, 204, 0.4) !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 102, 204, 0.1) !important;
+}
+
+body.light-theme .glass-input {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+}
+
+body.light-theme .glass-input:focus {
+  border-color: rgba(0, 102, 204, 0.5) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .text-transparent.bg-gradient-to-b.from-white {
+  background-image: linear-gradient(to bottom, #0f172a, #475569) !important;
+}
+
+body.light-theme .bg-radial-vignette {
+  background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(241, 245, 249, 0.8) 100%) !important;
+}
+
+body.light-theme .border-t-white\/5 {
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
