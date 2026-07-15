@@ -59,9 +59,6 @@ export default function Portfolio() {
 
   return (
     <div className="relative w-screen min-h-screen overflow-x-hidden transition-colors duration-500">
-      {/* 3D Scroll-Linked Background Animation */}
-      <Background3D />
-
       {/* Luxury Trailing Custom Cursor */}
       <CustomCursor />
       
