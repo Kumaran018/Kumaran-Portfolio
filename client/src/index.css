@@ -254,3 +254,13 @@ body.light-theme .hover\:text-white:hover {
   color: #0f172a !important;
 }
 
+.glass-card-inner {
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%), #0a0a0a;
+  color: #ffffff;
+}
+
+body.light-theme .glass-card-inner {
+  background: radial-gradient(circle at 50% 0%, rgba(0,0,0,0.01) 0%, transparent 100%), #ffffff !important;
+  color: #0f172a !important;
+}
+

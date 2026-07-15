@@ -47,7 +47,7 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative rounded-2xl p-[1px] overflow-hidden transition-all duration-150 ${
+      className={`glass-card relative rounded-2xl p-[1px] overflow-hidden transition-all duration-150 ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
       style={{
@@ -55,21 +55,21 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
         transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.15s ease',
         background: isHovered 
           ? `radial-gradient(circle at ${coords.x}px ${coords.y}px, ${isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255, 255, 255, 0.2)'} 0%, ${isLightTheme ? 'rgba(0,0,0,0.02)' : 'rgba(255, 255, 255, 0.04)'} 50%, transparent 100%)`
-          : (isLightTheme ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.05)'),
+          : undefined,
         boxShadow: isHovered 
           ? `0 15px 35px -10px ${isLightTheme ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.8)'}, 0 0 25px ${glowColor.replace('0.25', '0.06')}`
-          : `0 10px 30px -10px ${isLightTheme ? 'rgba(0,0,0,0.05)' : 'rgba(0,0,0,0.5)'}`,
+          : undefined,
       }}
     >
       {/* Inner card container */}
       <div 
-        className={`relative backdrop-blur-xl w-full h-full rounded-2xl p-6 overflow-hidden transition-colors duration-150 ${
-          isLightTheme ? 'bg-white/80' : 'bg-dark-900/90'
-        }`}
+        className="glass-card-inner relative backdrop-blur-xl w-full h-full rounded-2xl p-6 overflow-hidden transition-colors duration-150"
         style={{
-          background: isLightTheme 
-            ? 'radial-gradient(circle at 50% 0%, rgba(0,0,0,0.01) 0%, transparent 100%), #ffffff'
-            : 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%), #0a0a0a'
+          background: isHovered
+            ? (isLightTheme 
+                ? 'radial-gradient(circle at 50% 0%, rgba(0,0,0,0.01) 0%, transparent 100%), #ffffff'
+                : 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%), #0a0a0a')
+            : undefined
         }}
       >
         {/* Soft background glow trace inside the card */}
