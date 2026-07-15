@@ -15,8 +15,41 @@ const submitMessage = async (req, res) => {
       message
     });
 
-    // Send email notification via Nodemailer (if environment variables exist)
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+    // Send email notification
+    if (process.env.RESEND_API_KEY) {
+      // Use Resend HTTP API (works perfectly on Render)
+      const emailBody = {
+        from: 'Portfolio Contact <onboarding@resend.dev>',
+        to: process.env.EMAIL_RECEIVER || 'kumaranrp49@gmail.com',
+        subject: `Portfolio Contact: ${subject || 'No Subject'}`,
+        html: `<h3>New Portfolio Message</h3>
+               <p><strong>Name:</strong> ${name}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Subject:</strong> ${subject || 'No Subject'}</p>
+               <p><strong>Message:</strong></p>
+               <p>${message.replace(/\n/g, '<br>')}</p>`
+      };
+
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailBody)
+      })
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.ok) {
+          console.log('Notification email sent successfully via Resend:', data);
+        } else {
+          console.error('Resend API error:', data);
+        }
+      })
+      .catch((err) => console.error('Resend network error:', err.message));
+
+    } else if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      // Fallback to Nodemailer SMTP (works locally)
       const transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE || 'gmail',
         auth: {
@@ -40,11 +73,10 @@ ${message}
 `,
       };
 
-      // Send email in the background without blocking the HTTP response
       transporter.sendMail(mailOptions)
-        .then(() => console.log('Notification email sent successfully'))
+        .then(() => console.log('Notification email sent successfully via SMTP'))
         .catch((emailErr) => {
-          console.error('Nodemailer error (Render blocks standard SMTP ports):', emailErr.message);
+          console.error('Nodemailer SMTP error:', emailErr.message);
         });
     }
 
