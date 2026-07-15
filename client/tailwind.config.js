@@ -23,6 +23,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'Outfit', 'sans-serif'],
         mono: ['Fira Code', 'Courier New', 'monospace'],
+        orbitron: ['Orbitron', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
