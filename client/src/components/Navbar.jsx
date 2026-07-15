@@ -70,12 +70,12 @@ export default function Navbar({ activeSection }) {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+    <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-50 transition-all duration-300 rounded-2xl border ${
       scrolled 
-        ? 'py-4 bg-black/75 backdrop-blur-md border-b border-white/5 shadow-lg' 
-        : 'py-6 bg-transparent'
+        ? 'py-3 bg-black/75 backdrop-blur-md border-white/10 shadow-xl' 
+        : 'py-4 bg-black/40 backdrop-blur-sm border-white/5 shadow-md'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="w-full px-6 flex items-center justify-between">
         {/* Brand Logo */}
         <a 
           href="#hero" 
