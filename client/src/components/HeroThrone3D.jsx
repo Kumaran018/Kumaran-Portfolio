@@ -5,9 +5,18 @@ import * as THREE from 'three';
 
 // Sub-component to render the Image Card in 3D with mouse tilt
 function ThreeDCard({ isHovered, coords, isLightTheme }) {
-  const texture = useTexture('/throne.webp');
+  const [texture, setTexture] = useState(null);
   const groupRef = useRef();
   const materialRef = useRef();
+
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    loader.load('/throne.webp', (tex) => {
+      if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace;
+      else tex.encoding = 3001; // sRGBEncoding
+      setTexture(tex);
+    });
+  }, []);
 
   useFrame(() => {
     if (!groupRef.current) return;
@@ -56,10 +65,12 @@ function ThreeDCard({ isHovered, coords, isLightTheme }) {
       </RoundedBox>
       
       {/* Front Image Overlay */}
-      <mesh position={[0, 0, 0.032]}>
-        <planeGeometry args={[2.12, 2.82]} />
-        <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} />
-      </mesh>
+      {texture && (
+        <mesh position={[0, 0, 0.032]}>
+          <planeGeometry args={[2.12, 2.82]} />
+          <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} />
+        </mesh>
+      )}
     </group>
   );
 }
@@ -186,10 +197,8 @@ export default function HeroThrone3D() {
           <ambientLight intensity={isLightTheme ? 1.2 : 0.8} />
           <pointLight position={[10, 10, 10]} intensity={isLightTheme ? 2.0 : 1.5} />
           
-          <Suspense fallback={<ThreeDLoader />}>
-            <ThreeDCard isHovered={isHovered} coords={coords} isLightTheme={isLightTheme} />
-            <OrbitalAnimation isLightTheme={isLightTheme} />
-          </Suspense>
+          <ThreeDCard isHovered={isHovered} coords={coords} isLightTheme={isLightTheme} />
+          <OrbitalAnimation isLightTheme={isLightTheme} />
 
           {/* Futuristic Glowing Concentric Platform Pedestal */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.8, 0]}>
