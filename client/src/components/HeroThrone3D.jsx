@@ -41,7 +41,7 @@ function ThreeDCard({ isHovered, coords, isLightTheme }) {
           thickness={0.8} 
           roughness={0.15} 
           metalness={0.1}
-          color={isLightTheme ? "#ffffff" : "#121212"}
+          color={isLightTheme ? "#ffffff" : "#555d70"}
         />
       </RoundedBox>
       
