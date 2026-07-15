@@ -243,7 +243,7 @@ export default function HeroThrone3D({ onReady, isInView }) {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(() => {
-    return document.body.classList.contains('light-theme');
+    return (localStorage.getItem('theme') || 'dark') === 'light';
   });
 
   useEffect(() => {
