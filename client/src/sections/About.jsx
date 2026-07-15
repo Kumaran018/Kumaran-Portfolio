@@ -5,7 +5,7 @@ import { resumeData } from '../data/resumeData';
 
 export default function About() {
   return (
-    <section id="about" className="relative w-screen min-h-screen py-32 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
+    <section id="about" className="relative w-screen min-h-screen py-16 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
       
       {/* Background glow effects */}
       <div className="absolute top-[20%] right-[-150px] w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />

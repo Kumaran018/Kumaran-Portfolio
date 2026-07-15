@@ -43,7 +43,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative w-screen min-h-screen py-32 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
+    <section id="contact" className="relative w-screen min-h-screen py-16 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
       {/* Glow highlight */}
       <div className="absolute left-[10%] bottom-[-50px] w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-[110px] pointer-events-none" />
 

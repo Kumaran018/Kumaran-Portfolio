@@ -40,7 +40,7 @@ export default function Skills() {
     : skillItems.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" className="relative w-screen min-h-screen py-32 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
+    <section id="skills" className="relative w-screen min-h-screen py-16 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
       
       {/* Background radial highlight */}
       <div className="absolute top-[30%] left-[20%] w-[550px] h-[550px] bg-accent-blue/5 rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />

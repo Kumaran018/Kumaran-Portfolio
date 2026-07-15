@@ -31,7 +31,7 @@ export default function Certifications() {
   );
 
   return (
-    <section id="certifications" className="relative w-screen min-h-screen py-32 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
+    <section id="certifications" className="relative w-screen min-h-screen py-16 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
       {/* Light effect */}
       <div className="absolute right-[-100px] top-[20%] w-[450px] h-[450px] bg-accent-blue/5 rounded-full blur-[100px] pointer-events-none animate-pulse-slow" />
 

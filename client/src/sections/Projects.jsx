@@ -29,7 +29,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="relative w-screen min-h-screen py-32 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
+    <section id="projects" className="relative w-screen min-h-screen py-16 px-8 md:px-24 bg-transparent overflow-hidden flex flex-col justify-center select-none">
       
       {/* Visual background lights */}
       <div className="absolute top-[20%] left-[-150px] w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
