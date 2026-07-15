@@ -43,6 +43,7 @@ export default function Navbar({ activeSection }) {
       document.body.classList.remove('light-theme');
     }
     localStorage.setItem('theme', theme);
+    window.dispatchEvent(new Event('themechange'));
   }, [theme]);
 
   const toggleTheme = () => {

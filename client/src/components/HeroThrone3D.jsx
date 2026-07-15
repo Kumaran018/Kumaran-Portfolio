@@ -141,18 +141,16 @@ export default function HeroThrone3D() {
   const containerRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(() => {
+    return document.body.classList.contains('light-theme');
+  });
 
   useEffect(() => {
-    const checkTheme = () => {
+    const handleThemeChange = () => {
       setIsLightTheme(document.body.classList.contains('light-theme'));
     };
-    checkTheme();
-    
-    // Listen for theme changes on body
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
+    window.addEventListener('themechange', handleThemeChange);
+    return () => window.removeEventListener('themechange', handleThemeChange);
   }, []);
 
   const handleMouseMove = (e) => {
