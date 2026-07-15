@@ -129,7 +129,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative w-screen min-h-screen flex flex-col justify-center px-8 md:px-24 pt-28 lg:pt-36 pb-20 overflow-hidden bg-transparent z-10 select-none">
+    <section id="hero" className="relative w-screen min-h-screen lg:h-screen flex flex-col justify-center px-8 md:px-24 pt-20 lg:pt-24 pb-20 lg:pb-0 overflow-hidden bg-transparent z-10 select-none">
       
       {/* Background aesthetics */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
