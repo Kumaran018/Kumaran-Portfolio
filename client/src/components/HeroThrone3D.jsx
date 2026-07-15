@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 // Sub-component to render the Image Card in 3D with mouse tilt
 function ThreeDCard({ isHovered, coords, isLightTheme }) {
-  const texture = useTexture('/throne.png');
+  const texture = useTexture('/throne.webp');
   const groupRef = useRef();
 
   useFrame(() => {
@@ -134,12 +134,7 @@ function OrbitalAnimation({ isLightTheme }) {
 
 // Fallback component to show while loading
 function ThreeDLoader() {
-  return (
-    <mesh>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial color="#d4af37" wireframe />
-    </mesh>
-  );
+  return null;
 }
 
 export default function HeroThrone3D() {
