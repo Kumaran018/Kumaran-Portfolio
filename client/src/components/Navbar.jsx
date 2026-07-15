@@ -6,9 +6,7 @@ export default function Navbar({ activeSection }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [timeString, setTimeString] = useState('');
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'dark';
-  });
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
     const handleScroll = () => {

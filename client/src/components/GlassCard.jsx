@@ -4,9 +4,7 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
   const cardRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(() => {
-    return (localStorage.getItem('theme') || 'dark') === 'light';
-  });
+  const [isLightTheme, setIsLightTheme] = useState(false);
 
   useEffect(() => {
     const handleThemeChange = () => {
