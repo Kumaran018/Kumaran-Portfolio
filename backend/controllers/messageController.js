@@ -17,20 +17,19 @@ const submitMessage = async (req, res) => {
 
     // Send email notification via Nodemailer (if environment variables exist)
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-      try {
-        const transporter = nodemailer.createTransport({
-          service: process.env.EMAIL_SERVICE || 'gmail',
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-          },
-        });
+      const transporter = nodemailer.createTransport({
+        service: process.env.EMAIL_SERVICE || 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-        const mailOptions = {
-          from: `"${name}" <${email}>`,
-          to: process.env.EMAIL_RECEIVER || 'kumaranrp49@gmail.com',
-          subject: `Portfolio Contact: ${subject || 'No Subject'}`,
-          text: `You have received a new message from your portfolio website.
+      const mailOptions = {
+        from: `"${name}" <${email}>`,
+        to: process.env.EMAIL_RECEIVER || 'kumaranrp49@gmail.com',
+        subject: `Portfolio Contact: ${subject || 'No Subject'}`,
+        text: `You have received a new message from your portfolio website.
           
 Name: ${name}
 Email: ${email}
@@ -39,14 +38,14 @@ Subject: ${subject}
 Message:
 ${message}
 `,
-        };
+      };
 
-        await transporter.sendMail(mailOptions);
-        console.log('Notification email sent successfully');
-      } catch (emailErr) {
-        console.error('Nodemailer configuration error or credentials invalid:', emailErr.message);
-        // Continue and respond success to client since the message is saved in MongoDB
-      }
+      // Send email in the background without blocking the HTTP response
+      transporter.sendMail(mailOptions)
+        .then(() => console.log('Notification email sent successfully'))
+        .catch((emailErr) => {
+          console.error('Nodemailer error (Render blocks standard SMTP ports):', emailErr.message);
+        });
     }
 
     res.status(201).json({
