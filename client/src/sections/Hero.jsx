@@ -18,12 +18,16 @@ export default function Hero() {
     return () => clearInterval(timer);
   }, []);
 
+  const heroRef = useRef(null);
+  const [isInView, setIsInView] = useState(true);
+
   // Premium particle flow network
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
+    let animationFrameId = null;
+    let isObserverActive = true;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -69,6 +73,7 @@ export default function Hero() {
     window.addEventListener('resize', handleResize);
 
     const animate = () => {
+      if (!isObserverActive) return;
       ctx.clearRect(0, 0, width, height);
 
       // Draw grid
@@ -113,10 +118,37 @@ export default function Hero() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    // IntersectionObserver to pause the render loop when Hero section is out of viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting;
+        setIsInView(visible);
+        if (visible) {
+          isObserverActive = true;
+          if (!animationFrameId) {
+            animate();
+          }
+        } else {
+          isObserverActive = false;
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        }
+      },
+      { threshold: 0.02 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      isObserverActive = false;
+      observer.disconnect();
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -140,7 +172,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative w-screen min-h-screen lg:h-screen flex flex-col justify-center px-8 md:px-24 pt-20 lg:pt-24 pb-20 lg:pb-0 overflow-hidden bg-transparent z-10 select-none">
+    <section ref={heroRef} id="hero" className="relative w-screen min-h-screen lg:h-screen flex flex-col justify-center px-8 md:px-24 pt-20 lg:pt-24 pb-20 lg:pb-0 overflow-hidden bg-transparent z-10 select-none">
       
       {/* Background aesthetics */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
@@ -258,7 +290,7 @@ export default function Hero() {
           
           {/* Interactive 3D Canvas */}
           <div className="absolute inset-0 w-full h-full z-10 flex items-center justify-center">
-            <HeroThrone3D onReady={() => setIs3DReady(true)} />
+            <HeroThrone3D onReady={() => setIs3DReady(true)} isInView={isInView} />
           </div>
         </div>
 

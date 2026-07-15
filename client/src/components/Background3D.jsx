@@ -6,23 +6,13 @@ import * as THREE from 'three';
 function MorphingBlob() {
   const meshRef = useRef();
   const materialRef = useRef();
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Track window scroll progress
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll <= 0) return;
-      const progress = window.scrollY / totalScroll;
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
+    
+    // Calculate scroll progress directly on frame tick to avoid React re-render thrashing
+    const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollProgress = totalScroll > 0 ? window.scrollY / totalScroll : 0;
     
     if (meshRef.current) {
       // 1. Position morphing linked to scroll progress

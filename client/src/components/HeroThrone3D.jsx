@@ -238,7 +238,7 @@ function ThreeDLoader() {
   return null;
 }
 
-export default function HeroThrone3D({ onReady }) {
+export default function HeroThrone3D({ onReady, isInView }) {
   const containerRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -275,6 +275,7 @@ export default function HeroThrone3D({ onReady }) {
       <div className="absolute inset-0 w-full h-full">
         <Canvas 
           camera={{ position: [0, 0, 4.2], fov: 50 }}
+          frameloop={isInView ? "always" : "never"}
           onCreated={() => {
             if (onReady) onReady();
           }}
