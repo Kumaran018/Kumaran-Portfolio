@@ -149,7 +149,7 @@ export default function Hero() {
 
           {/* Hero Title */}
           <div className="space-y-4 w-full">
-            <p className="text-sm uppercase tracking-[0.4em] font-medium text-white/35">My Name is</p>
+            <p className="text-sm uppercase tracking-[0.4em] font-medium text-white/35">Hello I am</p>
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 leading-[0.95] font-sans">
               KUMARAN R P
             </h1>

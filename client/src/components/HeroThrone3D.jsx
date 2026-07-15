@@ -172,12 +172,8 @@ export default function HeroThrone3D() {
       onMouseLeave={() => setIsHovered(false)}
       className="w-full max-w-md h-[430px] md:h-[530px] flex items-center justify-center relative z-10 select-none cursor-pointer"
     >
-      {/* 3D Canvas Container */}
-      <div className={`absolute inset-0 w-full h-full rounded-3xl overflow-hidden backdrop-blur-md transition-all duration-500 border ${
-        isLightTheme 
-          ? 'bg-white/35 border-black/5 shadow-lg' 
-          : 'bg-black/40 border-white/5 shadow-2xl'
-      }`}>
+      {/* 3D Canvas directly without outer container box or borders */}
+      <div className="absolute inset-0 w-full h-full">
         <Canvas camera={{ position: [0, 0, 4.2], fov: 50 }}>
           <ambientLight intensity={isLightTheme ? 1.2 : 0.8} />
           <pointLight position={[10, 10, 10]} intensity={isLightTheme ? 2.0 : 1.5} />
@@ -208,12 +204,6 @@ export default function HeroThrone3D() {
           {!isLightTheme && <Stars radius={100} depth={50} count={120} factor={4} saturation={0.5} fade speed={1} />}
         </Canvas>
       </div>
-
-      {/* Decorative Golden Corner Highlights (HTML overlaid on top of canvas) */}
-      <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
-      <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
-      <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-[#d4af37]/60 pointer-events-none" />
-      <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-[#d4af37]/60 pointer-events-none" />
     </div>
   );
 }
