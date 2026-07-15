@@ -6,7 +6,6 @@ export default function Navbar({ activeSection }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [timeString, setTimeString] = useState('');
-  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +19,6 @@ export default function Navbar({ activeSection }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Live clock logic
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
@@ -30,23 +28,6 @@ export default function Navbar({ activeSection }) {
     const interval = setInterval(updateClock, 1000);
     return () => clearInterval(interval);
   }, []);
-
-  // Theme switcher logic
-  useEffect(() => {
-    if (theme === 'light') {
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
-    } else {
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-    }
-    localStorage.setItem('theme', theme);
-    window.dispatchEvent(new Event('themechange'));
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   const navLinks = [
     { name: 'Hero', href: '#hero' },
@@ -114,15 +95,6 @@ export default function Navbar({ activeSection }) {
               <span>{timeString}</span>
             </div>
 
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/10 transition-all"
-              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}
-            </button>
-
             {/* Download Resume Button */}
             <a
               href="/Kumaran_Resume.pdf"
@@ -135,17 +107,8 @@ export default function Navbar({ activeSection }) {
           </div>
         </div>
 
-        {/* Mobile Hamburger & Quick Theme Trigger */}
+        {/* Mobile Hamburger */}
         <div className="lg:hidden flex items-center space-x-3">
-          {/* Quick Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/80 hover:text-white transition-all"
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          >
-            {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
-          </button>
-          
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white hover:text-accent-blue transition-colors p-2"

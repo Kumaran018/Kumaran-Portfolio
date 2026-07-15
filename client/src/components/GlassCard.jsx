@@ -1,18 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 export default function GlassCard({ children, className = '', glowColor = 'rgba(0, 102, 204, 0.25)', onClick }) {
   const cardRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(false);
-
-  useEffect(() => {
-    const handleThemeChange = () => {
-      setIsLightTheme(document.body.classList.contains('light-theme'));
-    };
-    window.addEventListener('themechange', handleThemeChange);
-    return () => window.removeEventListener('themechange', handleThemeChange);
-  }, []);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -54,10 +45,10 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
         transformStyle: 'preserve-3d',
         transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.15s ease',
         background: isHovered 
-          ? `radial-gradient(circle at ${coords.x}px ${coords.y}px, ${isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255, 255, 255, 0.2)'} 0%, ${isLightTheme ? 'rgba(0,0,0,0.02)' : 'rgba(255, 255, 255, 0.04)'} 50%, transparent 100%)`
+          ? `radial-gradient(circle at ${coords.x}px ${coords.y}px, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 50%, transparent 100%)`
           : undefined,
         boxShadow: isHovered 
-          ? `0 15px 35px -10px ${isLightTheme ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.8)'}, 0 0 25px ${glowColor.replace('0.25', '0.06')}`
+          ? `0 15px 35px -10px rgba(0,0,0,0.8), 0 0 25px ${glowColor.replace('0.25', '0.06')}`
           : undefined,
       }}
     >
@@ -66,9 +57,7 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
         className="glass-card-inner relative backdrop-blur-xl w-full h-full rounded-2xl p-6 overflow-hidden transition-colors duration-150"
         style={{
           background: isHovered
-            ? (isLightTheme 
-                ? 'radial-gradient(circle at 50% 0%, rgba(0,0,0,0.01) 0%, transparent 100%), #ffffff'
-                : 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%), #0a0a0a')
+            ? 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 100%), #0a0a0a'
             : undefined
         }}
       >
@@ -82,8 +71,8 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
               background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`,
               left: `${coords.x - 140}px`,
               top: `${coords.y - 140}px`,
-              mixBlendMode: isLightTheme ? 'normal' : 'screen',
-              opacity: isLightTheme ? 0.35 : 0.8,
+              mixBlendMode: 'screen',
+              opacity: 0.8,
               transition: 'opacity 0.2s ease',
             }}
           />
@@ -92,7 +81,7 @@ export default function GlassCard({ children, className = '', glowColor = 'rgba(
         {/* Diagonal hairline reflection */}
         <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/[0.01] to-white/0 pointer-events-none" />
 
-        <div className={`relative z-10 ${isLightTheme ? 'text-slate-900' : 'text-white'}`}>{children}</div>
+        <div className="relative z-10 text-white">{children}</div>
       </div>
     </div>
   );
