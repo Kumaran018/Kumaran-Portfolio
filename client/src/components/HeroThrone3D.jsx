@@ -158,7 +158,7 @@ function ThreeDLoader() {
   return null;
 }
 
-export default function HeroThrone3D() {
+export default function HeroThrone3D({ onReady }) {
   const containerRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -193,7 +193,12 @@ export default function HeroThrone3D() {
     >
       {/* 3D Canvas directly without outer container box or borders */}
       <div className="absolute inset-0 w-full h-full">
-        <Canvas camera={{ position: [0, 0, 4.2], fov: 50 }}>
+        <Canvas 
+          camera={{ position: [0, 0, 4.2], fov: 50 }}
+          onCreated={() => {
+            if (onReady) onReady();
+          }}
+        >
           <ambientLight intensity={isLightTheme ? 1.2 : 0.8} />
           <pointLight position={[10, 10, 10]} intensity={isLightTheme ? 2.0 : 1.5} />
           

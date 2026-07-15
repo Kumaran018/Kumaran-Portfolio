@@ -121,8 +121,19 @@ export default function Hero() {
     };
   }, []);
 
-  const handleScrollToProjects = () => {
+  const [is3DReady, setIs3DReady] = useState(false);
+
+  const handleExploreClick = (e) => {
+    e.preventDefault();
     const element = document.querySelector('#projects');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    const element = document.querySelector('#contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -146,37 +157,39 @@ export default function Hero() {
         
         {/* LEFT COLUMN: Texts, tags & CTAs (8 columns) */}
         <div className="lg:col-span-8 flex flex-col items-start space-y-8 order-2 lg:order-1">
-
-          {/* Hero Title */}
-          <div className="space-y-4 w-full">
-            <p className="text-sm uppercase tracking-[0.4em] font-medium text-white/35 mb-1">Hello I am</p>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.3rem] xl:text-[4rem] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 leading-none font-orbitron whitespace-nowrap">
-              KUMARAN R P
-            </h1>
-            
-            <div className="h-10 md:h-16 overflow-hidden relative flex items-center">
-              <span className="text-xl md:text-2xl xl:text-3xl font-bold tracking-wider bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-purple bg-clip-text text-transparent font-orbitron uppercase whitespace-nowrap">
-                {roles[roleIndex]}
-              </span>
-            </div>
+          {/* Subtle Tagline */}
+          <div className="flex items-center space-x-2.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-pulse" />
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/50 font-medium">
+              Hello I Am
+            </span>
           </div>
 
-          {/* Lead subtitle */}
-          <p className="max-w-2xl text-white/50 text-base md:text-lg font-light leading-relaxed font-sans">
+          {/* Heading Name */}
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white flex flex-col">
+            <span className="font-heading name-dark-bold">KUMARAN R P</span>
+          </h1>
+
+          {/* Subheading - Changing roles block */}
+          <div className="h-12 flex items-center overflow-hidden">
+            <span className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-purple bg-clip-text text-transparent transform transition-all duration-500 uppercase tracking-widest font-heading">
+              {roles[roleIndex]}
+            </span>
+          </div>
+
+          {/* Bio text */}
+          <p className="text-sm md:text-base text-white/55 leading-relaxed max-w-xl font-light">
             Detail-oriented engineer crafting premium full-stack web applications and AI-driven platforms. Focusing on minimalist designs, clean architectures, and flawless visual performance.
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4 w-full sm:w-auto">
-            <GlowingButton variant="accent" onClick={handleScrollToProjects} className="px-8 py-4">
-              <span>Explore My Work</span>
-              <ArrowRight size={16} />
+          {/* Call to Actions (CTAs) */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <GlowingButton onClick={handleExploreClick}>
+              Explore My Work <ArrowRight size={15} className="ml-2" />
             </GlowingButton>
-            <GlowingButton variant="secondary" onClick={() => {
-              const contact = document.querySelector('#contact');
-              if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-            }} className="px-8 py-4">
-              <span>Get in Touch</span>
+            
+            <GlowingButton variant="secondary" onClick={handleContactClick}>
+              Get In Touch
             </GlowingButton>
           </div>
 
@@ -195,8 +208,18 @@ export default function Hero() {
         </div>
 
         {/* RIGHT COLUMN: Interactive 3D Cyber Throne (4 columns) */}
-        <div className="lg:col-span-4 w-full flex items-center justify-center order-1 lg:order-2">
-          <HeroThrone3D />
+        <div className="lg:col-span-4 w-full flex items-center justify-center order-1 lg:order-2 relative h-[430px] md:h-[530px]">
+          {/* Instant Static Placeholder (visible immediately on page load, fades out when 3D is ready) */}
+          <div className={`absolute transition-opacity duration-700 ease-in-out z-0 flex items-center justify-center ${is3DReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            <div className="w-[180px] h-[240px] md:w-[220px] md:h-[290px] rounded-xl border-[6px] border-white shadow-[0_0_20px_rgba(255,255,255,0.85)] bg-[#0c0d12] overflow-hidden select-none pointer-events-none">
+              <img src="/throne.webp" alt="Throne" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          
+          {/* Interactive 3D Canvas */}
+          <div className="absolute inset-0 w-full h-full z-10 flex items-center justify-center">
+            <HeroThrone3D onReady={() => setIs3DReady(true)} />
+          </div>
         </div>
 
       </div>
