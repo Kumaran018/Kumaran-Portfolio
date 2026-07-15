@@ -75,8 +75,56 @@ function ThreeDCard({ isHovered, coords, isLightTheme }) {
   );
 }
 
+// Sub-component to render the glowing cyber particles
+function ParticleField({ isLightTheme }) {
+  const pointsRef = useRef();
+  const particleCount = 120;
+  
+  const [positions] = useState(() => {
+    const arr = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      const dist = 1.3 + Math.random() * 1.3; // dist between 1.3 and 2.6
+      arr[i * 3] = dist * Math.sin(phi) * Math.cos(theta);
+      arr[i * 3 + 1] = dist * Math.sin(phi) * Math.sin(theta);
+      arr[i * 3 + 2] = dist * Math.cos(phi);
+    }
+    return arr;
+  });
+
+  useFrame((state) => {
+    if (!pointsRef.current) return;
+    const time = state.clock.getElapsedTime();
+    pointsRef.current.rotation.y = time * 0.08;
+    pointsRef.current.rotation.x = Math.sin(time * 0.04) * 0.08;
+  });
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute 
+          attach="attributes-position"
+          args={[positions, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial 
+        color={isLightTheme ? "#00f2fe" : "#ffffff"} 
+        size={0.03} 
+        sizeAttenuation 
+        transparent 
+        opacity={isLightTheme ? 0.5 : 0.75}
+        depthWrite={false}
+      />
+    </points>
+  );
+}
+
 // Sub-component to manage the Orbits and Spheres
 function OrbitalAnimation({ isLightTheme }) {
+  const ring1Ref = useRef();
+  const ring2Ref = useRef();
+  const ring3Ref = useRef();
   const orb1Ref = useRef();
   const orb2Ref = useRef();
   const orb3Ref = useRef();
@@ -84,36 +132,50 @@ function OrbitalAnimation({ isLightTheme }) {
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     
+    // Rotate rings dynamically in all dimensions
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.x = t * 0.12;
+      ring1Ref.current.rotation.y = t * 0.08;
+    }
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.y = t * -0.15;
+      ring2Ref.current.rotation.z = t * 0.1;
+    }
+    if (ring3Ref.current) {
+      ring3Ref.current.rotation.x = t * -0.08;
+      ring3Ref.current.rotation.z = t * 0.18;
+    }
+
     // Orb 1: moves on Torus 1 (Gold)
     if (orb1Ref.current) {
-      const angle = t * 0.5;
+      const angle = t * 0.6;
       const x = Math.cos(angle) * 1.8;
       const y = Math.sin(angle) * 1.8;
       const pos = new THREE.Vector3(x, y, 0);
-      pos.applyAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2.3);
-      pos.applyAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 6);
+      pos.applyAxisAngle(new THREE.Vector3(1, 0, 0), t * 0.12);
+      pos.applyAxisAngle(new THREE.Vector3(0, 1, 0), t * 0.08);
       orb1Ref.current.position.copy(pos);
     }
 
     // Orb 2: moves on Torus 2 (Cyan)
     if (orb2Ref.current) {
-      const angle = -t * 0.4;
+      const angle = -t * 0.5;
       const x = Math.cos(angle) * 2.1;
       const y = Math.sin(angle) * 2.1;
       const pos = new THREE.Vector3(x, y, 0);
-      pos.applyAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 3.2);
-      pos.applyAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 5);
+      pos.applyAxisAngle(new THREE.Vector3(0, 1, 0), t * -0.15);
+      pos.applyAxisAngle(new THREE.Vector3(0, 0, 1), t * 0.1);
       orb2Ref.current.position.copy(pos);
     }
 
     // Orb 3: moves on Torus 3 (Purple)
     if (orb3Ref.current) {
-      const angle = t * 0.7;
+      const angle = t * 0.8;
       const x = Math.cos(angle) * 1.5;
       const y = Math.sin(angle) * 1.5;
       const pos = new THREE.Vector3(x, y, 0);
-      pos.applyAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 3.8);
-      pos.applyAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 4);
+      pos.applyAxisAngle(new THREE.Vector3(1, 0, 0), t * -0.08);
+      pos.applyAxisAngle(new THREE.Vector3(0, 0, 1), t * 0.18);
       orb3Ref.current.position.copy(pos);
     }
   });
@@ -121,32 +183,50 @@ function OrbitalAnimation({ isLightTheme }) {
   return (
     <group>
       {/* Torus 1: Gold */}
-      <mesh rotation={[Math.PI / 2.3, Math.PI / 6, 0]}>
-        <torusGeometry args={[1.8, 0.005, 8, 100]} />
-        <meshBasicMaterial color="#d4af37" transparent opacity={isLightTheme ? 0.22 : 0.15} />
+      <mesh ref={ring1Ref}>
+        <torusGeometry args={[1.8, 0.012, 12, 64]} />
+        <meshStandardMaterial 
+          color="#d4af37" 
+          metalness={0.9} 
+          roughness={0.1} 
+          emissive="#d4af37" 
+          emissiveIntensity={isLightTheme ? 0.35 : 0.65} 
+        />
       </mesh>
       <mesh ref={orb1Ref}>
-        <sphereGeometry args={[0.045, 16, 16]} />
+        <sphereGeometry args={[0.05, 16, 16]} />
         <meshBasicMaterial color="#d4af37" />
       </mesh>
 
       {/* Torus 2: Cyan */}
-      <mesh rotation={[Math.PI / 3.2, -Math.PI / 5, 0]}>
-        <torusGeometry args={[2.1, 0.004, 8, 100]} />
-        <meshBasicMaterial color="#00f2fe" transparent opacity={isLightTheme ? 0.2 : 0.12} />
+      <mesh ref={ring2Ref}>
+        <torusGeometry args={[2.1, 0.01, 12, 64]} />
+        <meshStandardMaterial 
+          color="#00f2fe" 
+          metalness={0.9} 
+          roughness={0.1} 
+          emissive="#00f2fe" 
+          emissiveIntensity={isLightTheme ? 0.35 : 0.65} 
+        />
       </mesh>
       <mesh ref={orb2Ref}>
-        <sphereGeometry args={[0.04, 16, 16]} />
+        <sphereGeometry args={[0.045, 16, 16]} />
         <meshBasicMaterial color="#00f2fe" />
       </mesh>
 
       {/* Torus 3: Purple */}
-      <mesh rotation={[-Math.PI / 3.8, Math.PI / 4, 0]}>
-        <torusGeometry args={[1.5, 0.004, 8, 100]} />
-        <meshBasicMaterial color="#8622e6" transparent opacity={isLightTheme ? 0.2 : 0.12} />
+      <mesh ref={ring3Ref}>
+        <torusGeometry args={[1.5, 0.01, 12, 64]} />
+        <meshStandardMaterial 
+          color="#8622e6" 
+          metalness={0.9} 
+          roughness={0.1} 
+          emissive="#8622e6" 
+          emissiveIntensity={isLightTheme ? 0.35 : 0.65} 
+        />
       </mesh>
       <mesh ref={orb3Ref}>
-        <sphereGeometry args={[0.04, 16, 16]} />
+        <sphereGeometry args={[0.045, 16, 16]} />
         <meshBasicMaterial color="#8622e6" />
       </mesh>
     </group>
@@ -204,6 +284,7 @@ export default function HeroThrone3D({ onReady }) {
           
           <ThreeDCard isHovered={isHovered} coords={coords} isLightTheme={isLightTheme} />
           <OrbitalAnimation isLightTheme={isLightTheme} />
+          <ParticleField isLightTheme={isLightTheme} />
 
           {/* Futuristic Glowing Concentric Platform Pedestal */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.8, 0]}>
