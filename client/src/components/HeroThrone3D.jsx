@@ -7,6 +7,7 @@ import * as THREE from 'three';
 function ThreeDCard({ isHovered, coords, isLightTheme }) {
   const texture = useTexture('/throne.webp');
   const groupRef = useRef();
+  const materialRef = useRef();
 
   useFrame(() => {
     if (!groupRef.current) return;
@@ -27,21 +28,30 @@ function ThreeDCard({ isHovered, coords, isLightTheme }) {
     // Add a gentle floating animation
     const time = Date.now() * 0.001;
     groupRef.current.position.y = Math.sin(time * 1.2) * 0.06;
+
+    // Pulse the emissive intensity of the border for a dynamic lightning/energy glow!
+    if (materialRef.current) {
+      const baseIntensity = isLightTheme ? 0.45 : 0.95;
+      materialRef.current.emissiveIntensity = baseIntensity + Math.sin(time * 6.0) * 0.15;
+    }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Premium Glass Card Backing */}
+      {/* Premium Glass Card Backing with Dynamic Energy Glow */}
       <RoundedBox args={[2.2, 2.9, 0.06]} radius={0.08} smoothness={4}>
         <meshPhysicalMaterial 
+          ref={materialRef}
           clearcoat={1.0} 
           clearcoatRoughness={0.1} 
-          transmission={0.8} 
+          transmission={0.4} 
           opacity={1} 
           thickness={0.8} 
-          roughness={0.15} 
+          roughness={0.1} 
           metalness={0.1}
-          color={isLightTheme ? "#ffffff" : "#555d70"}
+          color="#ffffff"
+          emissive="#ffffff"
+          emissiveIntensity={isLightTheme ? 0.45 : 0.95}
         />
       </RoundedBox>
       
