@@ -193,10 +193,6 @@ export default function HeroThrone3D() {
 
           {/* Futuristic Glowing Concentric Platform Pedestal */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.8, 0]}>
-            <ringGeometry args={[0, 1.8, 64]} />
-            <meshBasicMaterial color={isLightTheme ? "#0f172a" : "#ffffff"} transparent opacity={0.03} />
-          </mesh>
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.8, 0]}>
             <ringGeometry args={[1.75, 1.77, 64]} />
             <meshBasicMaterial color="#d4af37" transparent opacity={isLightTheme ? 0.35 : 0.25} />
           </mesh>
