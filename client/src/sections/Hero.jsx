@@ -144,18 +144,18 @@ export default function Hero() {
       {/* Main typographic container: Modified to a 2-Column Grid */}
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-20">
         
-        {/* LEFT COLUMN: Texts, tags & CTAs (7 columns) */}
-        <div className="lg:col-span-7 flex flex-col items-start space-y-8 order-2 lg:order-1">
+        {/* LEFT COLUMN: Texts, tags & CTAs (8 columns) */}
+        <div className="lg:col-span-8 flex flex-col items-start space-y-8 order-2 lg:order-1">
 
           {/* Hero Title */}
           <div className="space-y-4 w-full">
-            <p className="text-sm uppercase tracking-[0.4em] font-medium text-white/35">Hello I am</p>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 leading-[0.95] font-orbitron">
+            <p className="text-sm uppercase tracking-[0.4em] font-medium text-white/35 mb-1">Hello I am</p>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.8rem] font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 leading-none font-orbitron whitespace-nowrap">
               KUMARAN R P
             </h1>
             
-            <div className="h-20 md:h-28 overflow-hidden relative flex items-center pb-2">
-              <span className="text-2xl md:text-4xl xl:text-5xl font-bold tracking-wider bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-purple bg-clip-text text-transparent font-orbitron uppercase">
+            <div className="h-14 md:h-20 overflow-hidden relative flex items-center">
+              <span className="text-2xl md:text-4xl xl:text-5xl font-bold tracking-wider bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-purple bg-clip-text text-transparent font-orbitron uppercase whitespace-nowrap">
                 {roles[roleIndex]}
               </span>
             </div>
@@ -194,8 +194,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Interactive 3D Cyber Throne (5 columns) */}
-        <div className="lg:col-span-5 w-full flex items-center justify-center order-1 lg:order-2">
+        {/* RIGHT COLUMN: Interactive 3D Cyber Throne (4 columns) */}
+        <div className="lg:col-span-4 w-full flex items-center justify-center order-1 lg:order-2">
           <HeroThrone3D />
         </div>
 
