@@ -144,7 +144,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         className="w-full glass-input rounded-xl p-3 text-xs text-white"
-                        placeholder="Kumaran"
+                        placeholder=""
                       />
                     </div>
 
@@ -157,7 +157,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full glass-input rounded-xl p-3 text-xs text-white"
-                        placeholder="name@gmail.com"
+                        placeholder=""
                       />
                     </div>
                   </div>
@@ -170,7 +170,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       className="w-full glass-input rounded-xl p-3 text-xs text-white"
-                      placeholder="Collaboration inquiry"
+                      placeholder=""
                     />
                   </div>
 
@@ -183,7 +183,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full glass-input rounded-xl p-3 text-xs text-white resize-none"
-                      placeholder="Hi, I'd like to talk about..."
+                      placeholder=""
                     />
                   </div>
 
