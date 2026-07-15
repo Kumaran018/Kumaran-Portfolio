@@ -59,18 +59,26 @@ export default function Projects() {
             return (
               <GlassCard 
                 key={project.id || project._id} 
-                className="flex flex-col h-[520px] justify-between"
+                className="flex flex-col h-full justify-between"
                 glowColor={currentGlow}
               >
                 <div className="space-y-6">
                   {/* Decorative Project Frame */}
                   <div className="relative w-full h-48 rounded-xl overflow-hidden bg-white/[0.03] border border-white/5 flex items-center justify-center group-hover:border-white/10 transition-all duration-300">
-                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-white/20" />
-                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/20" />
-                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/20" />
-                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-white/20" />
+                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-white/20 z-10" />
+                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/20 z-10" />
+                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/20 z-10" />
+                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-white/20 z-10" />
                     
-                    <Code2 size={40} className="text-white/25 group-hover:scale-110 group-hover:text-accent-blue transition-all duration-500" />
+                    {project.image ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                    ) : (
+                      <Code2 size={40} className="text-white/25 group-hover:scale-110 group-hover:text-accent-blue transition-all duration-500" />
+                    )}
                   </div>
 
                   {/* Project description */}
