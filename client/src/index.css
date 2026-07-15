@@ -226,9 +226,9 @@ body.light-theme .glass-input:focus {
 }
 
 body.light-theme .from-white {
-  --tw-gradient-from: #0f172a !important;
-  --tw-gradient-to: #475569 !important;
-  --tw-gradient-stops: #0f172a, #334155, #475569 !important;
+  --tw-gradient-from: #020408 !important;
+  --tw-gradient-to: #1e293b !important;
+  --tw-gradient-stops: #020408, #0f172a, #1e293b !important;
 }
 
 body.light-theme .bg-transparent.text-white.border.border-white\/10 {
