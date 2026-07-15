@@ -32,11 +32,11 @@ export default function HeroThrone3D() {
   };
 
   return (
-    <div className="w-full max-w-lg h-[460px] md:h-[560px] flex items-center justify-center relative z-10 select-none">
+    <div className="w-full max-w-md h-[430px] md:h-[530px] flex items-center justify-center relative z-10 select-none">
       
       {/* Dynamic Background Neon Gold Glow */}
       <div 
-        className="absolute w-[320px] md:w-[350px] h-[390px] md:h-[440px] bg-gradient-to-tr from-[#d4af37]/20 via-[#f3e5ab]/15 to-transparent rounded-full blur-[80px] pointer-events-none transition-all duration-700" 
+        className="absolute w-[290px] md:w-[320px] h-[370px] md:h-[410px] bg-gradient-to-tr from-[#d4af37]/20 via-[#f3e5ab]/15 to-transparent rounded-full blur-[80px] pointer-events-none transition-all duration-700" 
         style={{
           transform: isHovered ? 'scale(1.15) translate(10px, -10px)' : 'scale(1)'
         }}
@@ -52,7 +52,7 @@ export default function HeroThrone3D() {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative w-[330px] md:w-[380px] h-[430px] md:h-[490px] rounded-3xl p-[1.5px] overflow-hidden cursor-pointer"
+        className="relative w-[310px] md:w-[350px] h-[410px] md:h-[460px] rounded-3xl p-[1.5px] overflow-hidden cursor-pointer"
         style={{
           transformStyle: 'preserve-3d',
           transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease',
