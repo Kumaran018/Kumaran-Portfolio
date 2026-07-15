@@ -10,31 +10,9 @@ import Contact from '../sections/Contact';
 import Footer from '../sections/Footer';
 import CustomCursor from '../components/CustomCursor';
 import Background3D from '../components/Background3D';
-import Lenis from 'lenis';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('hero');
-
-  // Initialize Lenis Smooth Scroll
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      wheelMultiplier: 1,
-      infinite: false,
-      gestureOrientation: 'vertical'
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
 
   // Monitor visible sections for Navbar highlights
   useEffect(() => {
