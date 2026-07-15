@@ -217,8 +217,21 @@ body.light-theme .glass-input:focus {
   background: rgba(0, 0, 0, 0.04) !important;
 }
 
-body.light-theme .text-transparent.bg-gradient-to-b.from-white {
-  background-image: linear-gradient(to bottom, #0f172a, #475569) !important;
+body.light-theme .from-white {
+  --tw-gradient-from: #0f172a !important;
+  --tw-gradient-to: #475569 !important;
+  --tw-gradient-stops: #0f172a, #334155, #475569 !important;
+}
+
+body.light-theme .bg-transparent.text-white.border.border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: #0f172a !important;
+}
+
+body.light-theme .bg-transparent.text-white.border.border-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.4) !important;
+  color: #000000 !important;
 }
 
 body.light-theme .bg-radial-vignette {
