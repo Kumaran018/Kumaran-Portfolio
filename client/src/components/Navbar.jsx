@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Terminal, ShieldAlert, Clock, Sun, Moon, Download } from 'lucide-react';
+import { Menu, X, Terminal, ShieldAlert, Clock, Download } from 'lucide-react';
 
 export default function Navbar({ activeSection }) {
   const [isOpen, setIsOpen] = useState(false);
