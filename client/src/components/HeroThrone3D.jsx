@@ -4,7 +4,7 @@ import { useTexture, Stars, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Sub-component to render the Image Card in 3D with mouse tilt
-function ThreeDCard({ isHovered, coords, isLightTheme }) {
+function ThreeDCard({ isHovered, coords, isLightTheme, onTextureLoaded }) {
   const [texture, setTexture] = useState(null);
   const groupRef = useRef();
   const materialRef = useRef();
@@ -15,6 +15,9 @@ function ThreeDCard({ isHovered, coords, isLightTheme }) {
       if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace;
       else tex.encoding = 3001; // sRGBEncoding
       setTexture(tex);
+      if (onTextureLoaded) {
+        setTimeout(onTextureLoaded, 60); // 60ms buffer for compile
+      }
     });
   }, []);
 
@@ -266,14 +269,11 @@ export default function HeroThrone3D({ onReady, isInView }) {
         <Canvas 
           camera={{ position: [0, 0, 5.2], fov: 50 }}
           frameloop={isInView ? "always" : "never"}
-          onCreated={() => {
-            if (onReady) onReady();
-          }}
         >
           <ambientLight intensity={isLightTheme ? 1.2 : 0.8} />
           <pointLight position={[10, 10, 10]} intensity={isLightTheme ? 2.0 : 1.5} />
           
-          <ThreeDCard isHovered={isHovered} coords={coords} isLightTheme={isLightTheme} />
+          <ThreeDCard isHovered={isHovered} coords={coords} isLightTheme={isLightTheme} onTextureLoaded={onReady} />
           <OrbitalAnimation isLightTheme={isLightTheme} />
           <ParticleField isLightTheme={isLightTheme} />
 
