@@ -242,9 +242,9 @@ export default function Hero() {
         {/* RIGHT COLUMN: Interactive 3D Cyber Throne (4 columns) */}
         <div className="lg:col-span-4 w-full flex items-center justify-center order-1 lg:order-2 relative h-[430px] md:h-[530px]">
           {/* Instant Static Placeholder (visible immediately on page load, fades out when 3D is ready) */}
-          <div className={`absolute transition-opacity duration-700 ease-in-out z-0 flex items-center justify-center w-[400px] h-[400px] ${is3DReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <div className={`absolute transition-opacity duration-700 ease-in-out z-0 flex items-center justify-center w-[300px] h-[300px] ${is3DReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             {/* Throne Card */}
-            <div className="w-[180px] h-[240px] md:w-[220px] md:h-[290px] rounded-xl border-[6px] border-white shadow-[0_0_20px_rgba(255,255,255,0.85)] bg-[#0c0d12] overflow-hidden select-none pointer-events-none relative z-10">
+            <div className="w-[144px] h-[192px] md:w-[176px] md:h-[232px] rounded-xl border-[6px] border-white shadow-[0_0_20px_rgba(255,255,255,0.85)] bg-[#0c0d12] overflow-hidden select-none pointer-events-none relative z-10">
               <img src="/throne.webp" alt="Throne" className="w-full h-full object-cover" />
             </div>
 
@@ -252,8 +252,8 @@ export default function Hero() {
             <div 
               className="absolute rounded-full border border-[#d4af37]/40 animate-[spin_8s_linear_infinite]" 
               style={{
-                width: '320px',
-                height: '320px',
+                width: '256px',
+                height: '256px',
                 transform: 'rotateX(70deg) rotateY(15deg)',
                 transformStyle: 'preserve-3d'
               }}
@@ -265,8 +265,8 @@ export default function Hero() {
             <div 
               className="absolute rounded-full border border-[#00f2fe]/40 animate-[spin_10s_linear_infinite]" 
               style={{
-                width: '370px',
-                height: '370px',
+                width: '296px',
+                height: '296px',
                 transform: 'rotateX(45deg) rotateY(-20deg)',
                 transformStyle: 'preserve-3d'
               }}
@@ -278,8 +278,8 @@ export default function Hero() {
             <div 
               className="absolute rounded-full border border-[#8622e6]/40 animate-[spin_6s_linear_infinite]" 
               style={{
-                width: '270px',
-                height: '270px',
+                width: '216px',
+                height: '216px',
                 transform: 'rotateX(-45deg) rotateZ(30deg)',
                 transformStyle: 'preserve-3d'
               }}

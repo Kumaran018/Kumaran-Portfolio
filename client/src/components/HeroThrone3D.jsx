@@ -264,7 +264,7 @@ export default function HeroThrone3D({ onReady, isInView }) {
       {/* 3D Canvas directly without outer container box or borders */}
       <div className="absolute inset-0 w-full h-full">
         <Canvas 
-          camera={{ position: [0, 0, 4.2], fov: 50 }}
+          camera={{ position: [0, 0, 5.2], fov: 50 }}
           frameloop={isInView ? "always" : "never"}
           onCreated={() => {
             if (onReady) onReady();
